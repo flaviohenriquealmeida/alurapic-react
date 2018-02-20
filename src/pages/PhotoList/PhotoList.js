@@ -30,9 +30,8 @@ class PhotoList extends Component {
         if(!searchText) return this.setState({ filteredPhotos: this.state.photos });
         const filteredPhotos = this.state.photos
             .filter(photo => photo.titulo.toLowerCase().includes(searchText));
-        this.setState({ filteredPhotos });
         const noPhotos = !filteredPhotos.length;
-        this.setState({ noPhotos });
+        this.setState({ filteredPhotos, noPhotos });
     }
 
     render() {
