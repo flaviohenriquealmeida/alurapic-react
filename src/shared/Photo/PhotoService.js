@@ -4,6 +4,9 @@ const handleResponse = res => res.ok
     ? res.json() 
     : Promise.reject(res.statusText)
 
+const headers = new Headers();
+headers.append('Content-Type', 'application/json');
+
 class PhotoService {
 
     listAll() {
@@ -11,8 +14,24 @@ class PhotoService {
             .then(handleResponse)
             .catch(err => {
                 console.log(err);
-                return Promise.reject("Can't load images");
-            })
+                return Promise.reject("Can't load photos");
+            });
+    }
+
+    save(photo) {
+
+        const config  = {
+            method: 'post',
+            headers,
+            body: JSON.stringify(photo),
+        };
+
+        return fetch(API, config)
+            .then(handleResponse)
+            .catch(err => {
+                console.log(err);
+                return Promise.reject("Can't load photos");
+            });
     }
 }
 
