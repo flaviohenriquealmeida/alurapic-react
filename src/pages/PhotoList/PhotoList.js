@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Photo, photoService as service } from '../../shared/Photo';
 import Card from '../../shared/Card/Card';
+import { Link } from 'react-router-dom';
 
 class PhotoList extends Component {
 
@@ -22,6 +23,13 @@ class PhotoList extends Component {
                     <h1 className="text-center">Alurapic</h1>
                 </div>
                 <div className="container">
+                    <form>
+                        <div className="input-group">
+                        <Link className="btn btn-primary" to="/form">New Photo</Link>
+                        <input className="form-control" placeholder="filtrar pelo título da foto"/>
+                        </div>
+                    </form>
+                    <br/>
                     <ul className="list-inline">
                     {
                         this.state.photos.map(photo =>
