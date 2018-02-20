@@ -15,7 +15,7 @@ import PhotoList from './pages/PhotoList/PhotoList';
 // precisa do Switch caso contrário renderizará mais de um compo
 ReactDOM.render((
     <BrowserRouter>
-        <div class="container">
+        <div className="container">
             <Switch>
                 <Route path="/list" component={PhotoList}/>
                 <Route path="/form" component={PhotoForm}/>

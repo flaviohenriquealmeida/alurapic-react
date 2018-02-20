@@ -6,7 +6,7 @@ class Card extends Component {
         return (
             <div className="card text-center">
                 <h4 className="card-header">{ this.props.title }</h4>
-                <div class="card-block">           
+                <div className="card-block">           
                     { this.props.children }
                 </div>
             </div>
