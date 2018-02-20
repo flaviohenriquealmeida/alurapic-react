@@ -7,23 +7,20 @@ class PhotoForm extends Component {
   constructor() {
     super();
     this.state = { titulo: '', url: '', descricao:  '' };
-    this.setTitle = this.setTitle.bind(this);
-    this.setUrl = this.setUrl.bind(this);
-    this.setDescription = this.setDescription.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.clearForm = this.clearForm.bind(this);
   }
 
-  setTitle(event) {
-    this.setState({ titulo: event.target.value });
-  }
+  handleInputChange(event) {
 
-  setUrl(event) {
-    this.setState({ url: event.target.value });
-  }
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
 
-  setDescription(event) {
-    this.setState({ descricao: event.target.value });
+    this.setState({
+      [name]: value
+    });
   }
 
   clearForm() {
@@ -31,13 +28,10 @@ class PhotoForm extends Component {
   }
 
   handleSubmit(event) {
+
     event.preventDefault();
-    const titulo = this.state.titulo;
-    const url = this.state.url;
-    const descricao = this.state.descricao;
+    const { titulo, url, descricao } = this.state;
     const photo = { titulo, url, descricao };
-
-
     service.save(photo)
       .then(() => this.clearForm())
       .catch(alert);
@@ -50,15 +44,15 @@ class PhotoForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Title</label>
-            <input onInput={this.setTitle} value={this.state.titulo} className="form-control" autoComplete="off" autoFocus/>    
+            <input name="titulo" onInput={this.handleInputChange} value={this.state.titulo} className="form-control" autoComplete="off" autoFocus/>    
           </div>
 
           <div className="form-group">
             <label>URL</label>
-            <input onInput={this.setUrl} value={this.state.url} className="form-control" autoComplete="off"/>    
+            <input name="url" onInput={this.handleInputChange} value={this.state.url} className="form-control" autoComplete="off"/>    
           </div>
 
-          <textarea onInput={this.setDescription} value={this.state.descricao} className="form-control" autoComplete="off"></textarea>
+          <textarea name="descricao" onInput={this.handleInputChange} value={this.state.descricao} className="form-control" autoComplete="off"></textarea>
               
           <hr/>
               
