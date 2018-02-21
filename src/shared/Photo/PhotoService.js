@@ -61,6 +61,18 @@ class PhotoService {
             });
             
     }
+
+    remove(id) {
+     
+        const config  = { method: 'delete' };
+    
+        return fetch(`${API}/${id}`, config)
+            .then(handleResponse)
+            .catch(err => {
+                console.log(err);
+                return Promise.reject("Can't delete photo");
+        });
+    }
 }
 
 export const photoService = new PhotoService();

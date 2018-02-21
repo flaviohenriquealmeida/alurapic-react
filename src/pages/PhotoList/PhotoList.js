@@ -13,6 +13,7 @@ class PhotoList extends Component {
             noPhotos: false
         };
         this.filterPhotos = this.filterPhotos.bind(this);
+        this.removePhotos = this.removePhoto.bind(this);
     }
     
     componentWillMount(){
@@ -32,6 +33,15 @@ class PhotoList extends Component {
             .filter(photo => photo.titulo.toLowerCase().includes(searchText));
         const noPhotos = !filteredPhotos.length;
         this.setState({ filteredPhotos, noPhotos });
+    }
+
+    removePhoto(id) {
+        service.remove(id)
+            .then(() => {
+                const photos = this.state.photos.filter(photo => photo._id !== id);
+                this.setState({ photos, filteredPhotos: photos });
+            })
+            .catch(alert);
     }
 
     render() {
@@ -65,7 +75,7 @@ class PhotoList extends Component {
                                     </Link>
                                     </Card>
                                     <div className="text-center">
-                                        <button className="btn btn-danger">Remover</button>
+                                        <button onClick={ this.removePhoto.bind(this, photo._id)} className="btn btn-danger">Remover</button>
                                     </div>
                                 </li>
                             )
