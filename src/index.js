@@ -11,15 +11,16 @@ import PhotoList from './pages/PhotoList/PhotoList';
 
 // BrowserRouter can have only one element, that's why the 
 // div is necessary
-
+// https://medium.com/@AkyunaAkish/understanding-react-router-4-df73a66d96c4
 // precisa do Switch caso contrário renderizará mais de um compo
 ReactDOM.render((
     <BrowserRouter>
         <div className="container">
             <Switch>
-                <Route path="/list" component={PhotoList}/>
-                <Route path="/form" component={PhotoForm}/>
-                <Redirect from="*" to="/list" />
+                <Route exact path="/form" component={PhotoForm}/>
+                <Route exact path="/form/:id" component={PhotoForm}/>
+                <Route exact path="/" component={PhotoList}/>
+                <Redirect from="*" to="/" />
             </Switch>
        </div>
     </BrowserRouter>

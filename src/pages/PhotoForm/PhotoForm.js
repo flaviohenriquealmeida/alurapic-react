@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { photoService as service } from '../../shared/Photo';
- 
 class PhotoForm extends Component {
 
   constructor() {
@@ -10,6 +9,16 @@ class PhotoForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.clearForm = this.clearForm.bind(this);
+  } 
+
+  componentWillMount() {
+
+    const id = this.props.match.params.id || 0;
+    if(id) service.getById(id)
+      .then(photo => {
+        const { titulo, url, descricao, _id} = photo;
+        this.setState({titulo, url, descricao, _id})
+      });
   }
 
   handleInputChange(event) {
@@ -24,17 +33,24 @@ class PhotoForm extends Component {
   }
 
   clearForm() {
-    this.setState({ titulo: '', url: '', descricao: ''});
+    this.setState({ titulo: '', url: '', descricao: '', _id: ''});
   }
 
   handleSubmit(event) {
 
     event.preventDefault();
-    const { titulo, url, descricao } = this.state;
-    const photo = { titulo, url, descricao };
-    service.save(photo)
-      .then(() => this.clearForm())
-      .catch(alert);
+    const { titulo, url, descricao, _id } = this.state;
+    const photo = { titulo, url, descricao, _id };
+    
+    if(photo._id) {
+      service.update(photo)
+        .then(() => this.props.history.push('/'))
+        .catch(alert);
+    } else {
+      service.add(photo)
+        .then(() => this.clearForm())
+        .catch(alert);
+    }
   }
 
   render() {
@@ -68,4 +84,6 @@ class PhotoForm extends Component {
   }
 }
 
-export default PhotoForm;
+// é isso que permite ter acesso aos parâmetros 
+// recebidos na URL segumentada
+export default withRouter(PhotoForm);

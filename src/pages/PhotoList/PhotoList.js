@@ -60,8 +60,13 @@ class PhotoList extends Component {
                             (
                                 <li key={ photo._id }>
                                     <Card title={ photo.titulo }>
-                                       <Photo url={ photo.url } title={ photo.title }/>
+                                    <Link to={'/form/' + photo._id }>
+                                        <Photo url={ photo.url } title={ photo.title }/>
+                                    </Link>
                                     </Card>
+                                    <div className="text-center">
+                                        <button className="btn btn-danger">Remover</button>
+                                    </div>
                                 </li>
                             )
                         )
