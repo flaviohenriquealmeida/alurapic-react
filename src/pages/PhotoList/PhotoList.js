@@ -1,51 +1,41 @@
 import React, { Component } from 'react';
-import { Photo, photoService as service } from '../../shared/Photo';
+import { Photo } from '../../shared/Photo';
 import Card from '../../shared/Card/Card';
 import { Link } from 'react-router-dom';
+// conecta o componente à store
+import { connect } from 'react-redux';
+import { fetchPhotos, filterPhotos } from '../../actions/photosActions';
 
 class PhotoList extends Component {
 
     constructor() {
         super();
-        this.state = { 
-            photos : [], 
-            filteredPhotos: [],
-            noPhotos: false
-        };
         this.filterPhotos = this.filterPhotos.bind(this);
         this.removePhotos = this.removePhoto.bind(this);
     }
-    
-    componentWillMount(){
 
-        service.listAll()
-            .then(photos => {
-                const filteredPhotos = [];
-                filteredPhotos.push(...photos);
-                this.setState({ photos, filteredPhotos });
-            });
+    componentWillMount() {
+        this.props.dispatch(fetchPhotos());
     }
-
+    
     filterPhotos(event) {
         const searchText = event.target.value.toLowerCase();
-        if(!searchText) return this.setState({ filteredPhotos: this.state.photos });
-        const filteredPhotos = this.state.photos
-            .filter(photo => photo.titulo.toLowerCase().includes(searchText));
-        const noPhotos = !filteredPhotos.length;
-        this.setState({ filteredPhotos, noPhotos });
+        this.props.dispatch(filterPhotos, searchText);
     }
 
     removePhoto(id) {
+        /*
         service.remove(id)
             .then(() => {
                 const photos = this.state.photos.filter(photo => photo._id !== id);
                 this.setState({ photos, filteredPhotos: photos });
             })
             .catch(alert);
+        */
     }
 
     render() {
-        const noPhotos = this.state.noPhotos;
+        const noPhotos = this.props.noPhotos;
         // não pode chamar função direto no evento, dentro do render 
         //m dá loop infinito
         return (
@@ -66,7 +56,7 @@ class PhotoList extends Component {
 
                     <ul className="list-inline">
                     {
-                        this.state.filteredPhotos.map(photo =>
+                        this.props.filteredPhotos.map(photo =>
                             (
                                 <li key={ photo._id }>
                                     <Card title={ photo.titulo }>
@@ -87,5 +77,13 @@ class PhotoList extends Component {
         );
     }
 }
+// tem decorator @connect também
 
-export default PhotoList;
+// que prefixar com o nome do reducer.
+const mapStateToProps = state => ({  
+    photos : state.photosReducer.photos,
+    filteredPhotos: state.photosReducer.filteredPhotos,
+    noPhoto: state.photosReducer.noPhoto
+});
+
+export default connect(mapStateToProps)(PhotoList);
