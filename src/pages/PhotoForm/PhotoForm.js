@@ -84,7 +84,4 @@ class PhotoForm extends Component {
     );
   }
 }
-
-// é isso que permite ter acesso aos parâmetros 
-// recebidos na URL segumentada
 export default withRouter(PhotoForm);
