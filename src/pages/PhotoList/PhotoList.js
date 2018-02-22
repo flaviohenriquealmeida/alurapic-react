@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Photo } from '../../shared/Photo';
 import Card from '../../shared/Card/Card';
 import { Link } from 'react-router-dom';
-// conecta o componente à store
 import { connect } from 'react-redux';
 import { fetchPhotos, filterPhotos } from '../../actions/photosActions';
 
@@ -20,7 +19,8 @@ class PhotoList extends Component {
     
     filterPhotos(event) {
         const searchText = event.target.value.toLowerCase();
-        this.props.dispatch(filterPhotos, searchText);
+        console.log(searchText);
+        this.props.dispatch(filterPhotos(searchText));
     }
 
     removePhoto(id) {
@@ -36,8 +36,7 @@ class PhotoList extends Component {
 
     render() {
         const noPhotos = this.props.noPhotos;
-        // não pode chamar função direto no evento, dentro do render 
-        //m dá loop infinito
+        
         return (
             <div>
                 <div className="jumbotron">
@@ -77,9 +76,7 @@ class PhotoList extends Component {
         );
     }
 }
-// tem decorator @connect também
 
-// que prefixar com o nome do reducer.
 const mapStateToProps = state => ({  
     photos : state.photosReducer.photos,
     filteredPhotos: state.photosReducer.filteredPhotos,

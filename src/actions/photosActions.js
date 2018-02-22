@@ -9,6 +9,6 @@ export const fetchPhotos = () => dispatch => {
 };
 
 export const filterPhotos = text => ({
-    type: 'FILTER_PHOTO',
+    type: 'FILTER_PHOTOS',
     payload: text
 });

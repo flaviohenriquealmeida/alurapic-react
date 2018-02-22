@@ -23,8 +23,8 @@ export const photosReducer = (state=initialState, action) => {
 
         case 'FILTER_PHOTOS': {
 
-            const searchText = action.payload.value.toLowerCase();
-            
+            const searchText = action.payload.toLowerCase();
+        
             if(!searchText) return {...state, filteredPhotos: [...state.photos]};
         
             const filteredPhotos = state.photos
