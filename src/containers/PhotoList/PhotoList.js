@@ -14,18 +14,18 @@ class PhotoList extends Component {
     }
 
     componentWillMount() {
-        this.props.dispatch(fetchPhotos());
+        this.props.fetchPhotos();
     }
     
     filterPhotos(event) {
         const searchText = event.target.value.toLowerCase();
         console.log(searchText);
-        this.props.dispatch(filterPhotos(searchText));
+        this.props.filterPhotos(searchText);
     }
 
     removePhoto(id) {
         
-        this.props.dispatch(removePhoto(id));
+        this.props.removePhoto(id);
     }
 
     render() {
@@ -71,10 +71,14 @@ class PhotoList extends Component {
     }
 }
 
+const mapDispatchToProps = {
+    fetchPhotos, filterPhotos, removePhoto
+};
+
 const mapStateToProps = state => ({  
     photos : state.photosReducer.photos,
     filteredPhotos: state.photosReducer.filteredPhotos,
     noPhoto: state.photosReducer.noPhoto
 });
 
-export default withRouter(connect(mapStateToProps)(PhotoList));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PhotoList));
