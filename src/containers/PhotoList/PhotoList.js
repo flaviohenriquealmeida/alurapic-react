@@ -13,7 +13,6 @@ class PhotoList extends Component {
     
     render() {
         const noPhotos = this.props.noPhotos;
-        
         return (
             <div>
                 <div className="jumbotron">
@@ -61,7 +60,7 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({  
     photos : state.photosReducer.photos,
     filteredPhotos: state.photosReducer.filteredPhotos,
-    noPhoto: state.photosReducer.noPhoto
+    noPhotos: state.photosReducer.noPhotos
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PhotoList));

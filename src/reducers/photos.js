@@ -12,10 +12,14 @@ export const photosReducer = (state=initialState, action) => {
     switch (action.type) {
 
         case c.FETCH_PHOTOS_FULFILLED: {
+            const photos = action.payload;
+            const noPhotos = !photos.length;
+            const filteredPhotos = [...photos];
             return {
                 ...state,
-                photos: action.payload,
-                filteredPhotos: [...action.payload]
+                photos,
+                filteredPhotos,
+                noPhotos
             }
         }
 
@@ -32,8 +36,8 @@ export const photosReducer = (state=initialState, action) => {
             const filteredPhotos = state.photos
                 .filter(photo => photo.titulo.toLowerCase().includes(searchText));
 
-            const noPhotos = !!state.filteredPhotos;
-                        
+            const noPhotos = !filteredPhotos.length;
+            console.log('noPhotos', noPhotos);
             return { ...state, filteredPhotos, noPhotos };
         }
 
