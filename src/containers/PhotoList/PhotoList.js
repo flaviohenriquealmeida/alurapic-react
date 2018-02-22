@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Photo } from '../../shared/Photo';
 import Card from '../../shared/Card/Card';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPhotos, filterPhotos, removePhoto } from '../../actions/photosActions';
 
@@ -77,4 +77,4 @@ const mapStateToProps = state => ({
     noPhoto: state.photosReducer.noPhoto
 });
 
-export default connect(mapStateToProps)(PhotoList);
+export default withRouter(connect(mapStateToProps)(PhotoList));
