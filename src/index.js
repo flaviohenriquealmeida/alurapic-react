@@ -4,8 +4,8 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import PhotoForm from './pages/PhotoForm/PhotoForm';
-import PhotoList from './pages/PhotoList/PhotoList';
+import PhotoForm from './containers/PhotoForm/PhotoForm';
+import PhotoList from './containers/PhotoList/PhotoList';
 import { Provider } from 'react-redux';
 import store from './store';
 
