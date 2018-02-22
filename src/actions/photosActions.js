@@ -19,13 +19,3 @@ export const removePhoto = id => dispatch => {
         .then(() =>  dispatch({ type: 'PHOTO_DELETED_FULFILED', payload: id }))
         .catch(err => dispatch({ type: 'PHOTO_DELETED_REJECTED', payload: err }))
 };
-
-export const fetchPhotoById = id => dispatch => {
-    service.getById(id)
-      .then(photo => dispatch({ type: 'FETCH_PHOTO_BY_ID_FULLFILED', payload: photo }))
-      .catch(err => dispatch({ type: 'FETCH_PHOTO_BY_ID_REJECTED', payload: err }))
-};
-
-export const emptyPhotoObject = text => ({
-    type: 'EMPTY_PHOTO_OBJECT'
-});

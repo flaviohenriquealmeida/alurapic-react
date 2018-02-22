@@ -1,11 +1,5 @@
 const initialState = {
     photos: [],
-    photo: {
-        _id: '',
-        titulo: '', 
-        url: '',
-        descricao: ''
-    },
     filteredPhotos: [],
     noPhotos: true,
     error: null,
@@ -46,24 +40,6 @@ export const photosReducer = (state=initialState, action) => {
             const photos = state.photos.filter(photo => photo._id !== id);
             const filteredPhotos = state.filteredPhotos.filter(photo => photo._id !== id);
             return { ...state, photos, filteredPhotos }
-        }
-
-        case 'FETCH_PHOTO_BY_ID_FULLFILED': {
-
-            const photo = action.payload;
-            return { ...state, photo };
-        }
-
-        case 'EMPTY_PHOTO_OBJECT': {
-            
-            const photo = {
-                _id: '',
-                titulo: '', 
-                url: '',
-                descricao: ''
-            };
-
-            return { ...state, photo}
         }
 
         default:
