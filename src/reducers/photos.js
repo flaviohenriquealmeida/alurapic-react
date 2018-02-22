@@ -34,6 +34,13 @@ export const photosReducer = (state=initialState, action) => {
                         
             return { ...state, filteredPhotos, noPhotos };
         }
+
+        case 'PHOTO_DELETED_FULFILED': {
+            const id = action.payload;
+            const photos = state.photos.filter(photo => photo._id !== id);
+            const filteredPhotos = state.filteredPhotos.filter(photo => photo._id !== id);
+            return { ...state, photos, filteredPhotos }
+        }
    
         default:
             return state;

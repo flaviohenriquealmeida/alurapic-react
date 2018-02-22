@@ -12,3 +12,10 @@ export const filterPhotos = text => ({
     type: 'FILTER_PHOTOS',
     payload: text
 });
+
+export const removePhoto = id => dispatch => {
+    service
+        .remove(id)
+        .then(() =>  dispatch({ type: "PHOTO_DELETED_FULFILED", payload: id }))
+        .catch(err => dispatch({ type: "PHOTO_DELETED_REJECTED", payload: err }))
+};

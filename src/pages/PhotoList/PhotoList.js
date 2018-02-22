@@ -3,7 +3,7 @@ import { Photo } from '../../shared/Photo';
 import Card from '../../shared/Card/Card';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPhotos, filterPhotos } from '../../actions/photosActions';
+import { fetchPhotos, filterPhotos, removePhoto } from '../../actions/photosActions';
 
 class PhotoList extends Component {
 
@@ -24,14 +24,8 @@ class PhotoList extends Component {
     }
 
     removePhoto(id) {
-        /*
-        service.remove(id)
-            .then(() => {
-                const photos = this.state.photos.filter(photo => photo._id !== id);
-                this.setState({ photos, filteredPhotos: photos });
-            })
-            .catch(alert);
-        */
+        
+        this.props.dispatch(removePhoto(id));
     }
 
     render() {
