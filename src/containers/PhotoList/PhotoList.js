@@ -7,27 +7,10 @@ import { fetchPhotos, filterPhotos, removePhoto } from '../../actions/photosActi
 
 class PhotoList extends Component {
 
-    constructor() {
-        super();
-        this.filterPhotos = this.filterPhotos.bind(this);
-        this.removePhotos = this.removePhoto.bind(this);
-    }
-
     componentWillMount() {
         this.props.fetchPhotos();
     }
     
-    filterPhotos(event) {
-        const searchText = event.target.value.toLowerCase();
-        console.log(searchText);
-        this.props.filterPhotos(searchText);
-    }
-
-    removePhoto(id) {
-        
-        this.props.removePhoto(id);
-    }
-
     render() {
         const noPhotos = this.props.noPhotos;
         
@@ -40,7 +23,7 @@ class PhotoList extends Component {
                     <form>
                         <div className="input-group">
                         <Link className="btn btn-primary" to="/form">New Photo</Link>
-                        <input onKeyUp={this.filterPhotos} className="form-control" placeholder="filter by title"/>
+                        <input onKeyUp={e => this.props.filterPhotos(e.target.value)} className="form-control" placeholder="filter by title"/>
                         </div>
                     </form>
                     <br/>
@@ -58,7 +41,7 @@ class PhotoList extends Component {
                                     </Link>
                                     </Card>
                                     <div className="text-center">
-                                        <button onClick={ this.removePhoto.bind(this, photo._id)} className="btn btn-danger">Remover</button>
+                                        <button onClick={ () => this.props.removePhoto(photo._id)} className="btn btn-danger">Remover</button>
                                     </div>
                                 </li>
                             )
