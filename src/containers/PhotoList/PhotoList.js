@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Photo } from '../../shared/Photo';
-import Card from '../../shared/Card/Card';
+import { Card } from '../../shared/Card/Card';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPhotos, filterPhotos, removePhoto } from '../../actions/photosActions';

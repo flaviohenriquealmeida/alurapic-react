@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class Photo extends Component {
+export const Photo = props =>
+    (<img 
+        className="img-fluid img-thumbnail" 
+        src={ props.url } 
+        alt={ props.title }/>
+    );
     
-    render() {
-        return (
-            <img className="img-fluid img-thumbnail" src={ this.props.url } alt={ this.props.title }/>
-        );
-    }
-}
