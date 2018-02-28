@@ -4,13 +4,14 @@ import { Card } from '../../shared/Card/Card';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPhotos, filterPhotos, removePhoto } from '../../actions/photosActions';
+import { Button } from '../../shared/Button/Button';
 
 class PhotoList extends Component {
 
     componentWillMount() {
         this.props.fetchPhotos();
     }
-    
+
     render() {
         const noPhotos = this.props.noPhotos;
         return (
@@ -41,6 +42,7 @@ class PhotoList extends Component {
                                     </Card>
                                     <div className="text-center">
                                         <button onClick={ () => this.props.removePhoto(photo._id)} className="btn btn-danger">Remover</button>
+                                        <Button parentMethod={ () => this.props.removePhoto(photo._id)} bsType="primary" text="Remove (with confirmation)"/>
                                     </div>
                                 </li>
                             )
