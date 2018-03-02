@@ -3,7 +3,6 @@ import c from '../constants/actionTypes';
 const initialState = {
     photos: [],
     filteredPhotos: [],
-    noPhotos: true,
     error: null,
 };
 
@@ -13,13 +12,11 @@ export const photosReducer = (state=initialState, action) => {
 
         case c.FETCH_PHOTOS_FULFILLED: {
             const photos = action.payload;
-            const noPhotos = !photos.length;
             const filteredPhotos = [...photos];
             return {
                 ...state,
                 photos,
-                filteredPhotos,
-                noPhotos
+                filteredPhotos
             }
         }
 
@@ -36,9 +33,7 @@ export const photosReducer = (state=initialState, action) => {
             const filteredPhotos = state.photos
                 .filter(photo => photo.titulo.toLowerCase().includes(searchText));
 
-            const noPhotos = !filteredPhotos.length;
-            console.log('noPhotos', noPhotos);
-            return { ...state, filteredPhotos, noPhotos };
+            return { ...state, filteredPhotos };
         }
 
         case c.PHOTO_DELETED_FULFILED: {

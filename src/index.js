@@ -4,8 +4,8 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import PhotoForm from './containers/PhotoForm/PhotoForm';
-import PhotoList from './containers/PhotoList/PhotoList';
+import PhotoContainer from './containers/PhotoContainer/PhotoContainer';
+import PhotosContainer from './containers/PhotosContainer/PhotosContainer';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -14,9 +14,9 @@ ReactDOM.render((
         <BrowserRouter>
             <div className="container">
                 <Switch>
-                    <Route exact path="/form" component={PhotoForm}/>
-                    <Route exact path="/form/:id" component={PhotoForm}/>
-                    <Route exact path="/" component={PhotoList}/>
+                    <Route exact path="/form" component={PhotoContainer}/>
+                    <Route exact path="/form/:id" component={PhotoContainer}/>
+                    <Route exact path="/" component={PhotosContainer}/>
                     <Redirect from="*" to="/" />
                 </Switch>
         </div>
