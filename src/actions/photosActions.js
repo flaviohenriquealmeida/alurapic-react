@@ -2,7 +2,7 @@ import { photoService as service } from '../shared/Photo';
 import c from '../constants/actionTypes';
 
 // assincronous
-export const fetchPhotos = () => dispatch => {
+export const fetchPhotos = () => (dispatch, getState) => {
     service
         .listAll()
         .then(photos =>  dispatch({ type: c.FETCH_PHOTOS_FULFILLED, payload: photos }))
@@ -14,7 +14,7 @@ export const filterPhotos = text => ({
     payload: text
 });
 
-export const removePhoto = id => dispatch => {
+export const removePhoto = id => (dispatch, getState) => {
     service
         .remove(id)
         .then(() =>  dispatch({ type: c.PHOTO_DELETED_FULFILED, payload: id }))

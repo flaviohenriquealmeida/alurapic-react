@@ -61,12 +61,12 @@ class PhotoForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Title</label>
-            <input name="titulo" onInput={this.handleInputChange} value={this.state.titulo} className="form-control" autoComplete="off" autoFocus/>    
+            <input required name="titulo" onInput={this.handleInputChange} value={this.state.titulo} className="form-control" autoComplete="off" autoFocus/>    
           </div>
 
           <div className="form-group">
             <label>URL</label>
-            <input name="url" onInput={this.handleInputChange} value={this.state.url} className="form-control" autoComplete="off"/>    
+            <input required name="url" onInput={this.handleInputChange} value={this.state.url} className="form-control" autoComplete="off"/>    
           </div>
 
           <textarea name="descricao" onInput={this.handleInputChange} value={this.state.descricao} className="form-control" autoComplete="off"></textarea>

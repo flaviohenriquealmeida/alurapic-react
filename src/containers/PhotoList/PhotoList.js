@@ -3,7 +3,7 @@ import { Photo } from '../../shared/Photo';
 import { Card } from '../../shared/Card/Card';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPhotos, filterPhotos, removePhoto } from '../../actions/photosActions';
+import * as PhotosAction from '../../actions/photosActions';
 import { Button } from '../../shared/Button/Button';
 
 class PhotoList extends Component {
@@ -41,8 +41,7 @@ class PhotoList extends Component {
                                     </Link>
                                     </Card>
                                     <div className="text-center">
-                                        <button onClick={ () => this.props.removePhoto(photo._id)} className="btn btn-danger">Remover</button>
-                                        <Button parentMethod={ () => this.props.removePhoto(photo._id)} bsType="primary" text="Remove (with confirmation)"/>
+                                        <Button parentMethod={ () => this.props.removePhoto(photo._id)} bsType="primary" text="Remove"/>
                                     </div>
                                 </li>
                             )
@@ -55,8 +54,19 @@ class PhotoList extends Component {
     }
 }
 
+
+/*
+Como usamos connect (redux-react), não precisamos fazer bindActionCreators
+*/
+// https://www.reddit.com/r/reactjs/comments/6fxlaz/when_to_use_mapdispatchtoprops_vs_action_creator/
+
+/*
+const mapDispatchToProps = dispatch => 
+    bindActionCreators(PhotosAction, dispatch);
+*/
+
 const mapDispatchToProps = {
-    fetchPhotos, filterPhotos, removePhoto
+    ...PhotosAction
 };
 
 const mapStateToProps = state => ({  
