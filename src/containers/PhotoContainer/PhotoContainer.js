@@ -18,7 +18,7 @@ class PhotoContainer extends Component {
     if(id) service.getById(id)
       .then(photo => {
         const { titulo, url, descricao, _id} = photo;
-        this.setState({titulo, url, descricao, _id})
+        this.setState({ titulo, url, descricao, _id })
       });
   }
 

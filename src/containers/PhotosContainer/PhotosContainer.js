@@ -42,9 +42,13 @@ const mapDispatchToProps = {
     ...PhotosAction
 };
 
-const mapStateToProps = state => ({  
-    photos : state.photosReducer.photos,
-    filteredPhotos: state.photosReducer.filteredPhotos
-});
+const mapStateToProps = state => {
+    console.dir(state)
+    return ({  
+        photos : state.photosReducer.photos,
+        filteredPhotos: state.photosReducer.filteredPhotos
+    });
+}
+
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PhotosContainer));
