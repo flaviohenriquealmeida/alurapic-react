@@ -14,7 +14,7 @@ export const PhotoList = props => (
                 (
                     <li key={ photo._id }>
                         <Card title={ photo.titulo }>
-                        <Link to={'/form/' + photo._id }>
+                        <Link to={'/photo/' + photo._id }>
                             <Photo url={ photo.url } title={ photo.title }/>
                         </Link>
                         </Card>

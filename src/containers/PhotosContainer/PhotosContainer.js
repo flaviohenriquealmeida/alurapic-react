@@ -21,7 +21,7 @@ class PhotosContainer extends Component {
                 <div className="container">
                     <form>
                         <div className="input-group">
-                            <Link className="btn btn-primary" to="/form">New Photo</Link>
+                            <Link className="btn btn-primary" to="/photo/new">New Photo</Link>
                             <PhotosFilter 
                                 onFilter={ this.props.filterPhotos }
                             />
@@ -38,17 +38,11 @@ class PhotosContainer extends Component {
     }
 }
 
-const mapDispatchToProps = {
-    ...PhotosAction
-};
+const mapDispatchToProps = { ...PhotosAction };
 
-const mapStateToProps = state => {
-    console.dir(state)
-    return ({  
-        photos : state.photosReducer.photos,
-        filteredPhotos: state.photosReducer.filteredPhotos
-    });
-}
-
+const mapStateToProps = state => ({  
+    photos : state.photosReducer.photos,
+    filteredPhotos: state.photosReducer.filteredPhotos
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PhotosContainer));
