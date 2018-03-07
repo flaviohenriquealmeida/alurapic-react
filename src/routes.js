@@ -1,7 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import PhotoContainer from './containers/PhotoContainer/PhotoContainer';
+import asyncComponent from './asyncComponent';
 import PhotosContainer from './containers/PhotosContainer/PhotosContainer';
+
+// lazy loading
+const PhotoContainer = asyncComponent(() =>
+    import('./containers/PhotoContainer/PhotoContainer').then(module => module.default)
+);
 
 export default () => (
     <BrowserRouter>

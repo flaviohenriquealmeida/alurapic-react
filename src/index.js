@@ -8,7 +8,7 @@ import store from './store';
 import Routes from './routes';
 
 ReactDOM.render((
-    <div class="container">
+    <div className="container">
         <Provider store={ store }>
             <Routes/>
         </Provider>
